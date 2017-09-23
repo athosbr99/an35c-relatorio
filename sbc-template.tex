@@ -1,10 +1,8 @@
 \documentclass[12pt]{article}
 
 \usepackage{sbc-template}
-
 \usepackage{graphicx,url}
 \usepackage[alf]{abntex2cite}
-
 \usepackage[brazil]{babel}   
 \usepackage[latin1]{inputenc} 
      
@@ -12,7 +10,7 @@
 
 \title{Estudo de Caso da infraestrutura de banco de dados da Uber}
 
-\author{Athos Castro Moreno\inst{1}, Lais Brazil Peixoto Macedo\inst{1} }
+\author{Athos Castro Moreno, Lais Brazil Peixoto Macedo}
 
 \address{Departamento de Computação - Universidade Tecnológica Federal do Paraná
   (UTFPR)\\
@@ -30,12 +28,18 @@
 
 \section{Introdução}
 
-
 \section{Problema} 
+
+Uma empresa grande possui diversas informações armazenadas, que são constantemente requisitadas por diversos serviços, sejam aparelhos de clientes finais
+ou sistemas de \textit{middleware}. O sistema de banco de dados selecionado não pode demorar para entregar as informações requisitadas, muito menos perde-las.
+Centralizar todos os dados da empresa em um unico servidor de banco de dados pode, em alguns casos, não ser a melhor saida, devido questões de perfomance e segurança.
 
 \section{Objetivo}
 
-\section{Estudo de Caso}
+Neste trabalho será relatado como a Uber armazena suas informações, através do conhecido SGBD MySQL, da Oracle em uma arquitetura de 
+microserviços, os motivos desta abordagem, suas vantagens e como é utilizada. 
+
+\section{Estudo de Caso} 
 
 \subsection{Empresa estudada} % Lais
 
@@ -43,13 +47,20 @@ A empresa norte-americana UberCab, fundada em 2009 por Garrett Camp e Travis Kal
 a proposta inicial de ser um serviço semelhante a um táxi com carros de luxo pretos tendo as 
 requisições feitas por um dispositivo eletrônico. 
 Em maio de 2010 foi lançada a versão beta e somente em 2011 o serviço foi lançado oficialmente
- na cidade de São Francisco com preços mais caros que um Táxi normal. 
-Em 2011 a companhia mudou seu nome para Uber e em Julho de 2012 foi introduzido 
-o serviço UberX permitindo que pessoas dirigissem com seus próprios carros e em 2013 o serviço já estava em 35 cidades. 
+na cidade de São Francisco com preços mais caros que um táxi normal. 
+Em 2011 a companhia mudou seu nome para Uber e em julho de 2012 foi introduzido 
+o serviço UberX, permitindo que pessoas dirigissem com seus próprios carros. Em 2013 o serviço já estava em 35 cidades. 
 Hoje a Uber possui serviços de transportes, entregas de comidas e pacotes, 
 com colaboradores utilizando desde bicicletas até caminhões, presente em 633 cidades do mundo \cite{uber0000}.
 
-\subsection{Tecnologia utilizada} % Athos
+\subsection{Tecnologias utilizadas} % Athos
+
+\subsubsection{MySQL}
+
+O MySQL é um SGBD escrito nas linguagens C e C++ com suporte a grandes banco de dados.
+É mantido atualmente pela Oracle e é um dos sistemas SGBD mais utilizados mundialmente \cite{mysql2017}.
+
+\subsubsection{Docker}
 
 \subsection{Técnicas de arquitetura de software utilizadas} % Lais, microserviços
 
