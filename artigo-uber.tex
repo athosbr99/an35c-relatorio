@@ -1,5 +1,4 @@
 \documentclass[12pt]{article}
-
 \usepackage{sbc-template}
 \usepackage{graphicx,url}
 \usepackage[alf]{abntex2cite}
@@ -32,12 +31,13 @@
 
 Uma empresa grande possui diversas informações armazenadas, que são constantemente requisitadas por diversos serviços, sejam aparelhos de clientes finais
 ou sistemas de \textit{middleware}. O sistema de banco de dados selecionado não pode demorar para entregar as informações requisitadas, muito menos perde-las.
-Centralizar todos os dados da empresa em um unico servidor de banco de dados pode, em alguns casos, não ser a melhor saida, devido questões de perfomance e segurança.
+Centralizar todos os dados da empresa em um único servidor de banco de dados pode, em alguns casos, não ser a melhor saída, devido questões de performance e segurança, 
+sendo necessário descobrir novas formas de implementar uma estrutura de banco de dados confiável.
 
 \section{Objetivo}
 
 Neste trabalho será relatado como a Uber armazena suas informações, através do conhecido SGBD MySQL, da Oracle em uma arquitetura de 
-microserviços, os motivos desta abordagem, suas vantagens e como é utilizada. 
+micro serviços, os motivos desta abordagem, suas vantagens e como é utilizada. 
 
 \section{Estudo de Caso} 
 
@@ -50,19 +50,24 @@ Em maio de 2010 foi lançada a versão beta e somente em 2011 o serviço foi lançad
 na cidade de São Francisco com preços mais caros que um táxi normal. 
 Em 2011 a companhia mudou seu nome para Uber e em julho de 2012 foi introduzido 
 o serviço UberX, permitindo que pessoas dirigissem com seus próprios carros. Em 2013 o serviço já estava em 35 cidades. 
-Hoje a Uber possui serviços de transportes, entregas de comidas e pacotes, 
-com colaboradores utilizando desde bicicletas até caminhões, presente em 633 cidades do mundo \cite{uber0000}.
+Hoje a Uber possui serviços de transportes, entregas de alimentos e pacotes, 
+com colaboradores utilizando desde bicicletas até caminhões, presente em 633 cidades do mundo \cite{uber2017}.
 
 \subsection{Tecnologias utilizadas} % Athos
 
 \subsubsection{MySQL}
 
-O MySQL é um SGBD escrito nas linguagens C e C++ com suporte a grandes banco de dados.
+MySQL é um SGBD escrito nas linguagens C e C++ com suporte a banco de dados de todos os tamanhos.
 É mantido atualmente pela Oracle e é um dos sistemas SGBD mais utilizados mundialmente \cite{mysql2017}.
 
 \subsubsection{Docker}
 
-\subsection{Técnicas de arquitetura de software utilizadas} % Lais, microserviços
+Docker é uma plataforma de \textit{containers} para desenvolvedores e operadores de infraestrutura. 
+É utilizado para substituir o uso de maquinas virtuais em ambientes de desenvolvimento, substituindo por 
+\textit{containers}, que são versões mais enxutas de sistemas operacionais, que funcionam isoladamente do sistema operacional hospedeiro
+e podem ser customizados e compartilhados através da plataforma Docker \cite{docker2017}.
+
+\subsection{Técnicas de arquitetura de software utilizadas} % Lais, micro serviços
 
 \subsubsection{Revisão sobre os conceitos} % Athos
 
