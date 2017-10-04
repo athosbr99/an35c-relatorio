@@ -37,7 +37,7 @@ sendo necessário descobrir novas formas de implementar uma estrutura de banco de
 \section{Objetivo}
 
 Neste trabalho será relatado como a Uber armazena suas informações, através do conhecido SGBD (Sistema de Gerenciamento de Banco de Dados) MySQL, da Oracle em uma arquitetura de 
-micro serviços, os motivos desta abordagem, suas vantagens e como é utilizada. 
+microserviços, os motivos desta abordagem, suas vantagens e como é utilizada. 
 
 \section{Estudo de Caso} 
 
@@ -53,6 +53,26 @@ o serviço UberX, permitindo que pessoas dirigissem com seus próprios carros. Em 
 Hoje a Uber possui serviços de transportes, entregas de alimentos e pacotes, 
 com colaboradores utilizando desde bicicletas até caminhões, presente em 633 cidades do mundo \cite{uber2017}.
 
+\subsection{Técnicas de arquitetura de software utilizadas}
+
+\subsubsection{Microserviços}
+
+Um microserviço é um serviço que tem uma responsabilidade limitada, reduzida, autônoma e modelado em base de domínios específicos de negócio. Desta forma, um conjunto de microserviços irão resultar
+em uma aplicação. Da perspectiva do desenvolvimento, cada serviço deve ser tratado como uma aplicação diferente, com seus próprios repositórios \cite{Jaramillo2016}.
+
+Como vantagens em utilizar microserviços, é possível listar o aumento de escalabilidade, menos barreiras para introduzir novas tecnologias dentro de um projeto,
+inicio mais rápido das aplicações, desde que seja implementado da forma correta, aumento de reuso e facilidade de substituição dos componentes, quando necessário
+\cite{Gouigoux2017} \cite{Khazaei2016} \cite{Yousif2016}.
+
+Como desafios da implementação de microserviços pode ser listada a dificuldade de encontrar a granularidade correta dos serviços -- quanto é muito, quanto é pouco? -- de um sistema,
+necessidade de automação -- o implementação de uma aplicação monolítica demora horas, a implementação de uma aplicação de microserviços pode demorar dias sem automação -- 
+durante a implementação e garantir a independência -- se um serviço cair, os outros devem funcionar normalmente ou, no máximo, com funcionalidades reduzidas -- dos 
+serviços entre si. Uma das vantagens de utilizar microserviços, a escalabilidade, pode também ser um desafio se não implementada corretamente no inicio do desenvolvimento
+do projeto. É também necessário traçar estratégias para a elaboração de testes, como os serviços são fragmentados e cada um é um sistema independente, todos precisam ter seus próprios testes
+\cite{Jaramillo2016} \cite{Gouigoux2017}.
+
+Existe uma forte ligação entre arquiteturas baseadas em serviços e o conceito de \textit{containers}, que neste artigo utilizaremos o Docker \cite{Gouigoux2017}. 
+
 \subsection{Tecnologias utilizadas} % Athos
 
 \subsubsection{MySQL}
@@ -66,14 +86,9 @@ incluindo Google, Facebook, Twitter, Yahoo!, entre outros \cite{mysql2017-2}.
 
 \subsubsection{Docker}
 
-Docker é uma plataforma de \textit{micro serviços} para desenvolvedores e operadores de infraestrutura. 
-É utilizado para substituir o uso de maquinas virtuais em ambientes de desenvolvimento com o conceito de 
-\textit{containers}, que são versões mais enxutas de sistemas operacionais, que funcionam isoladamente do sistema operacional hospedeiro
-e podem ser customizados e compartilhados através da plataforma Docker \cite{docker2017}.
-
-\subsection{Técnicas de arquitetura de software utilizadas} % Lais, micro serviços
-
-\subsubsection{Revisão sobre os conceitos} % Athos
+Docker é uma plataforma de microserviços para desenvolvedores e operadores de infraestrutura. É utilizado para substituir o uso de maquinas virtuais em ambientes 
+de desenvolvimento com o conceito de \textit{containers}, que são versões mais enxutas de sistemas operacionais, que funcionam isoladamente do sistema operacional 
+hospedeiro e podem ser customizados e compartilhados através da plataforma Docker \cite{docker2017}.
 
 \subsection{Detalhes da Implementação}
 
