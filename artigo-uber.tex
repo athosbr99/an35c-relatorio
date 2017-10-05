@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage{sbc-template}
 \usepackage{graphicx,url}
+\usepackage{hyperref}
 \usepackage[alf]{abntex2cite}
 \usepackage[brazil]{babel}   
 \usepackage[latin1]{inputenc} 
@@ -99,8 +100,8 @@ Os conceitos principais para entender e utilizar o Docker são \cite{Jaramillo201
   \item \textit{Container:} Um \textit{container} do Docker é um ambiente isolado, incluindo um sistema operacional compartilhado, \textit{middleware} e quaisquer
   serviços e arquivos necessários para funcionar uma aplicação dentro de um container.
   \item Imagem: É um modelo somente escrita, no qual os \textit{containers} são baseados. Uma imagem tem como base outra imagem de um sistema operacional, sendo colocado
-  componentes adicionais para posterior distribuição. Exemplos de imagens são a do PostgreSQL (https://hub.docker.com/_/postgres/), NodeJS (https://hub.docker.com/_/node/)
-  e MySQL (https://hub.docker.com/_/mysql/). Todas essas imagens tem como base algum sistema operacional -- geralmente o Debian GNU\Linux -- e podem ser baixadas, modificadas
+  componentes adicionais para posterior distribuição. Exemplos de imagens são a do PostgreSQL (\url{https://hub.docker.com/_/postgres/}), NodeJS (\url{https://hub.docker.com/_/node/})
+  e MySQL (\url{https://hub.docker.com/_/mysql/}). Todas essas imagens tem como base algum sistema operacional -- geralmente o Debian GNU/Linux -- e podem ser baixadas, modificadas
   e redistribuídas por qualquer usuário do Docker.
   \item Dockerfile: É um arquivo texto que contem instruções a serem executadas em cima de uma imagem disponível no Docker Hub, a nuvem do Docker. Quando uma requisição de \textit{build}
   é executada com uma Dockerfile, o \textit{daemon} lê as instruções que estão no arquivo -- geralmente são comandos para serem executados no \item{shell} do sistema operacional do \textit{container} -- e
