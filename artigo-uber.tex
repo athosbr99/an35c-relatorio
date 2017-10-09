@@ -114,7 +114,17 @@ Os conceitos principais para entender e utilizar o Docker são \cite{Jaramillo201
 
 Em 2016, a Uber anunciou, através de um artigo em seu \textit{blog} de engenharia a troca do PostgreSQL para o MySQL, alegando restrições técnicas no projeto do PostgreSQL.
 O anuncio também continha uma informação importante: o Uber utilizava uma arquitetura monolítica com o PostgreSQL e com a migração pro MySQL, haveria a mudança para uma arquitetura
-de microserviços. 
+de microserviços, alegando que o crescimento da Uber não era condizente com uma estrutura monolítica \cite{uber2016}.
+
+Entre os motivos alegados para deixar de utilizar o PostgreSQL, estavam \cite{uber2016}:
+
+\begin{itemize}
+  \item Arquitetura ineficiente para escrita;
+  \item Arquitetura ineficiente para replicação de dados;
+  \item Problemas com corrupção de tabelas;
+  \item Dificuldade para atualizar o PostgreSQL.
+\end{itemize}
+
 
 \subsection{Resultados}
 
