@@ -131,6 +131,21 @@ Atualmente, a Uber utiliza MySQL em um sistema \textit{Schemaless} -- o que não 
 bancos de dados NoSQL. Tanto os bancos de dados do MySQL e o sistema da Uber em si são desenvolvidos e implementados atualmente com o 
 conceito de microserviços.
 
+Como justificativa para a criação de uma solução própria, a Uber lista \cite{uber2016-2}:
+
+\begin{itemize}
+  \item Linearidade para adicionar capacidade através do crescimento do numero de servidores;
+  \item Disponibilidade para escrita de dados através de um \textit{buffer} escalavel;
+  \item Notificação de dependencias entre componentes avulsos, que antes eram acoplados;
+  \item \textit{Index} segundários, para suportar o PostgreSQL;
+  \item Confiança operacional no sistema, já que envolvia dados criticos e era necessário saber como o sistema funciona em casos de falha critica;
+\end{itemize}
+
+Os engenheiros da Uber, após analisar soluções existentes no mercado na época decidiram que pelos critérios
+citados acima, era mais viavel construir uma solução própria para armazenar e gerenciar seus dados de forma escalavel.
+
+
+
 \subsection{Resultados}
 
 \section{Análise crítica sobre o estudo de caso}
