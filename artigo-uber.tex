@@ -44,7 +44,7 @@ microserviços, os motivos desta abordagem, suas vantagens e como é utilizada.
 
 \section{Estudo de Caso} 
 
-\subsection{Empresa estudada} % Lais
+\subsection{Empresa estudada}
 
 A empresa norte-americana UberCab, fundada em 2009 por Garrett Camp e Travis Kalanick com a proposta inicial de ser um serviço semelhante a um táxi com carros de luxo 
 pretos tendo as requisições feitas por um dispositivo eletrônico. Em maio de 2010 foi lançada a versão beta e somente em 2011 o serviço foi lançado oficialmente na 
@@ -74,7 +74,7 @@ do projeto. É também necessário traçar estratégias para a elaboração de testes, 
 
 Existe uma forte ligação entre arquiteturas baseadas em serviços e o conceito de \textit{containers}, que neste artigo utilizaremos o Docker \cite{Gouigoux2017}. 
 
-\subsection{Tecnologias utilizadas} % Athos
+\subsection{Tecnologias utilizadas}
 
 \subsubsection{MySQL}
 
@@ -135,16 +135,39 @@ Como justificativa para a criação de uma solução própria, a Uber lista \cite{ube
 
 \begin{itemize}
   \item Linearidade para adicionar capacidade através do crescimento do numero de servidores;
-  \item Disponibilidade para escrita de dados através de um \textit{buffer} escalavel;
-  \item Notificação de dependencias entre componentes avulsos, que antes eram acoplados;
-  \item \textit{Index} segundários, para suportar o PostgreSQL;
-  \item Confiança operacional no sistema, já que envolvia dados criticos e era necessário saber como o sistema funciona em casos de falha critica;
+  \item Disponibilidade para escrita de dados através de um \textit{buffer} escalável;
+  \item Notificação de dependências entre componentes avulsos, que antes eram acoplados;
+  \item \textit{Index} secundários, para suportar o PostgreSQL;
+  \item Confiança operacional no sistema, já que envolvia dados críticos e era necessário saber como o sistema funciona em casos de falha critica;
 \end{itemize}
 
 Os engenheiros da Uber, após analisar soluções existentes no mercado na época decidiram que pelos critérios
-citados acima, era mais viavel construir uma solução própria para armazenar e gerenciar seus dados de forma escalavel.
+citados acima, era mais viável construir uma solução própria para armazenar e gerenciar seus dados de forma escalável. 
+O sistema de armazenamento \textit{Schemaless} funciona com diversos \textit{clusters} com o MySQL. É estimado que dentro da Uber existam mais de 
+1,000 \textit{clusters} com mais de 4000 servidores de banco de dados.
 
+Para gerenciar isso, a equipe do Uber utilizou, no inicio, o \text{software} Puppet, que é uma ferramenta de automação para configurações.
+Junto com o Puppet, era utilizado alguns \textit{scripts} e algumas operações manuais, que não eram escaláveis com o crescimento da empresa.
+A solução para este problema foi a criação de um design de sistema que foi dado o nome de Schemadock, constituindo em utilizar diversos containers do MySQL
+no Docker.
 
+A imagem do Docker utilizada pela Uber, quando criada, baixa o Percona Server e inicia o MySQL.
+Entre o processo de download e de inicio do MySQL, é verificado se no volume montado existe algum dado. Se não,
+caso seja uma instancia mestre, é iniciado um \textit{script} que coloca alguns usuários e tabelas padrões. Caso seja uma instancia
+escrava, inicia a sincronização de um \textit{backup} ou de outro \textit{node} no \textit{cluster}. Caso o processo de copia de dados falhe
+em algum momento, o \textit{container} desliga. O papel do \textit{container} é definido através de variáveis de ambiente.
+
+Os parâmetros de configuração do MySQL são inseridos dentro das imagens do Docker. Desta maneira, não é necessário (e não é feito)
+reiniciar um \textit{container} caso ele pare por qualquer motivo. Quando isto acontece, o responsavel na Uber simplesmente cria outro \textit{container}
+com a ultima imagem utilizada. O diretório de dados do MySQL é montado do sistema de arquivos do \textit{host}.
+
+As vantagens desta abordagem são:
+
+\begin{itemize}
+  \item Mudanças de configuração são mais fáceis de controlar, já que é necessário monitorar apenas as imagens;
+  \item A atualização do MySQL se resume em criar um \textit{container} novo e desligar os existentes;
+  \item Caso algo no \textit{container} atual não funcione corretamente, o atual é destruído e outro é criado do zero.
+\end{itemize}
 
 \subsection{Resultados}
 
