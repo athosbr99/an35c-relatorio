@@ -117,6 +117,10 @@ Os conceitos principais para entender e utilizar o Docker são \cite{Jaramillo201
 Em 2016, a Uber anunciou através de um artigo em seu \textit{blog} de engenharia a troca do PostgreSQL para o MySQL, alegando restrições técnicas no projeto do PostgreSQL.
 O anuncio também continha uma informação importante: o Uber utilizava uma arquitetura monolítica com o PostgreSQL e com a migração pro MySQL, haveria a mudança para uma arquitetura
 de microserviços, alegando que o crescimento da Uber não era condizente com uma estrutura monolítica \cite{uber2016}.
+Na sua criação, o Uber foi escrito em Python, utilizando como ORM (\textit{Object-Relational Mapping}) o SQLAcademy, com o PostgreSQL armazenando todos os dados em uma instancia única \cite{uber2015}.
+
+Um ORM é um \textit{framework} que permite que um desenvolvedor manipule um banco de dados utilizando o paradigma orientado a objetos. Utilizar um ORM abstrai a implementação de trabalhar diretamente
+com o banco de dados e fornece um mecanismo padrão para trabalhar com múltiplos SGBDs \cite{Juneau2013}.
 
 Entre os motivos alegados para deixar de utilizar o PostgreSQL, estavam \cite{uber2016}:
 
@@ -127,7 +131,7 @@ Entre os motivos alegados para deixar de utilizar o PostgreSQL, estavam \cite{ub
   \item Dificuldade para atualizar o PostgreSQL.
 \end{itemize}
 
-Atualmente, a Uber utiliza MySQL em um sistema \textit{Schemaless} -- o que não aparenta ser uma maneira convencional de implementação do MySQL --, bancos legados do PostgreSQL 9.2 e em alguns casos específicos,
+Atualmente, a Uber utiliza MySQL em um sistema \textit{Schemaless}, escrito em Python, bancos legados do PostgreSQL 9.2 e em alguns casos específicos,
 bancos de dados NoSQL. Tanto os bancos de dados do MySQL e o sistema da Uber em si são desenvolvidos e implementados atualmente com o 
 conceito de microserviços.
 
@@ -142,13 +146,25 @@ Como justificativa para a criação de uma solução própria, a Uber lista \cite{ube
 \end{itemize}
 
 Os engenheiros da Uber, após analisar soluções existentes no mercado na época decidiram que pelos critérios
-citados acima, era mais viável construir uma solução própria para armazenar e gerenciar seus dados de forma escalável. 
+citados acima, era mais viável construir uma solução própria para armazenar e gerenciar seus dados de forma escalável. A criação e migração para o sistema \textit{Schemaless}
+foi feita através de um projeto chamado \textit{Mezzanine}, que teve fim em setembro de 2014 sem nenhum \textit{downtime} no serviço da Uber \cite{uber2015}. 
+
+O projeto \textit{Mezzanine} teve como foco, através da criação e implementação do \textit{Schemaless}, a mudança de como as viagens feitas no aplicativo da Uber são armazenadas. 
+Desta forma, o \textit{Schemaless} teve como suas características principais \cite{uber2015}:
+
+\begin{itemize}
+  \item \textit{Sharding} (capacidade de armazenar dados em vários locais diferentes);
+  \item Escrita \textit{append-only}, ou seja, os dados são apenas adicionados e nunca atualizados;
+  \item \textit{Indexes} secundários em múltiplos locais (através do \textit{sharding});
+  \item \textit{Buffered writes}: Se o local que um dado precisa ser gravado está lento, este dado é gravado em outro servidor disponível até a disponibilidade do primeiro acontecer.
+\end{itemize}
+
 O sistema de armazenamento \textit{Schemaless} funciona com diversos \textit{clusters} com o MySQL. É estimado que dentro da Uber existam mais de 
-1,000 \textit{clusters} com mais de 4000 servidores de banco de dados.
-Para gerenciar isso, a equipe do Uber utilizou, no inicio, o \text{software} Puppet, que é uma ferramenta de automação para configurações.
+1,000 \textit{clusters} com mais de 4000 servidores de banco de dados. Para gerenciar isso, a equipe do Uber utilizou, no inicio, o \textit{software} Puppet, 
+que é uma ferramenta de automação para configurações.
 Junto com o Puppet, era utilizado alguns \textit{scripts} e algumas operações manuais, que não eram escaláveis com o crescimento da empresa.
 A solução para este problema foi a criação de um design de sistema que foi dado o nome de Schemadock, constituindo em utilizar diversos containers do MySQL
-no Docker. \cite{uber2016-3}
+no Docker \cite{uber2016-3}.
 
 A imagem do Docker utilizada pela Uber, quando criada, baixa o Percona Server e inicia o MySQL.
 Entre o processo de download e de inicio do MySQL, é verificado se no volume montado existe algum dado. Se não,
@@ -166,8 +182,6 @@ As vantagens desta abordagem são \cite{uber2016-3}:
   \item A atualização do MySQL se resume em criar um \textit{container} novo e desligar os existentes;
   \item Caso algo no \textit{container} atual não funcione corretamente, o atual é destruído e outro é criado do zero.
 \end{itemize}
-
-Com a imagem criada, é necessário que o \textit{container} seja criado de alguma maneira automatizada. 
 
 \subsection{Resultados}
 
