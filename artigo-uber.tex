@@ -112,7 +112,7 @@ Os conceitos principais para entender e utilizar o Docker são \cite{Jaramillo201
   Também é possível criar nuvens próprias para uso individual ou dentro de uma organização.
 \end{itemize}
 
-\subsection{Detalhes da Implementação}
+\section{Detalhes da Implementação}
 
 Em 2016, a Uber anunciou através de um artigo em seu \textit{blog} de engenharia a troca do PostgreSQL para o MySQL, alegando restrições técnicas no projeto do PostgreSQL.
 O anuncio também continha uma informação importante: o Uber utilizava uma arquitetura monolítica com o PostgreSQL e com a migração pro MySQL, haveria a mudança para uma arquitetura
@@ -130,6 +130,8 @@ Entre os motivos alegados para deixar de utilizar o PostgreSQL, estavam \cite{ub
   \item Problemas com corrupção de tabelas;
   \item Dificuldade para atualizar o PostgreSQL.
 \end{itemize}
+
+\subsection{Projeto \textit{Mezzanine}}
 
 Atualmente, a Uber utiliza MySQL em um sistema \textit{Schemaless}, escrito em Python, bancos legados do PostgreSQL 9.2 e em alguns casos específicos,
 bancos de dados NoSQL. Tanto os bancos de dados do MySQL e o sistema da Uber em si são desenvolvidos e implementados atualmente com o 
@@ -158,6 +160,16 @@ Desta forma, o \textit{Schemaless} teve como suas características principais \ci
   \item \textit{Indexes} secundários em múltiplos locais (através do \textit{sharding});
   \item \textit{Buffered writes}: Se o local que um dado precisa ser gravado está lento, este dado é gravado em outro servidor disponível até a disponibilidade do primeiro acontecer.
 \end{itemize}
+
+A execução do projeto \textit{Mezzanine} não foi sem problemas. O maior deles foi a migração de IDs únicos das viagens para o uso de UUIDs (Universally Unique Identifier).
+Um UUID é um identificador de 128 bits gerado por um algoritmo de forma a ser um identificador único, sendo improvável a criação de outro identificador igual em um momento futuro.
+É escrito em uma sequencia de dígitos hexadecimais em grupos separados por hifens, de modo a formar 32 dígitos representando 128 bits.
+Um exemplo de UUID é 12135aab-46da-4fd9-beb6-599adc00b041. O UUID é definido pelo padrão RFC 4122 \cite{postgresql2017}. O código original dependia de um auto incrementador do PostgreSQL,
+porém, foi definido que usar um inteiro que se auto incrementa não era condizente com o crescimento do aplicativo, sendo a migração para o UUID necessária. Então, era necessário trocar todos os inteiros por UUIDs.
+Outro problema foi que todas as \textit{queries} dentro do programa estavam no formato do ORM SQLAcademy. Era necessário reescrever todas para a API de queries do \textit{Schemaless}.
+E durante o processo era necessário fazer a validação dos dados migrados para garantir sua integridade \cite{uber2015}.
+
+\subsection{\textit{Dockerização} do MySQL}
 
 O sistema de armazenamento \textit{Schemaless} funciona com diversos \textit{clusters} com o MySQL. É estimado que dentro da Uber existam mais de 
 1,000 \textit{clusters} com mais de 4000 servidores de banco de dados. Para gerenciar isso, a equipe do Uber utilizou, no inicio, o \textit{software} Puppet, 
