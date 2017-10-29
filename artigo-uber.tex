@@ -199,6 +199,28 @@ As vantagens desta abordagem são \cite{uber2016-3}:
 
 \section{Análise crítica sobre o estudo de caso}
 
+Os artigos da Uber apresentados neste artigo, assim como outros no blog de Engenharia da Uber (https://eng.uber.com), fornecem uma visão única de como funciona
+internamente um aplicativo de sucesso mundial, incluindo como seus dados são gerenciados nos mínimos detalhes. Porém, é fácil de notar que
+a Uber exige de seus engenheiros um alto grau de conhecimento das ferramentas e \textit{frameworks} selecionados para uso, sendo que em alguns casos,
+a maioria deste artigo, a Uber preferiu criar soluções próprias em cima de soluções e conceitos já existentes.
+
+Tal grau de maturidade não é atingido facilmente, e muitas empresas de tecnologia, não importando o quão sensível são os dados que gerenciam e muitas vezes
+não importando a quantidade de certificações e prêmios da indústria que possuem, não conseguem atingir tal nível de domínio de todas as partes da aplicação. 
+É importante que empresas que possuem tal nível mostrem seus resultados, sejam para auxiliar a comunidade a criar aplicações robustas, confiáveis e que entregam 
+valor para o usuário e para mostrar que uma \textit{start-up}, apesar de talvez ser simples no inicio de sua implementação, pode 
+se tornar complicada facilmente e em pouco tempo. 
+
+Enquanto muitas empresas tratam suas especificações internas como uma caixa preta, um numero grande de empresas renomadas -- tais como Uber, provado neste artigo, 
+Facebook, Google, Microsoft, entre muitas outras -- estão criando diversos \textit{frameworks} para possibilitar que a comunidade crie aplicações cada vez melhores, assim como documentando seus procedimentos internos
+para que a comunidade conheça e aprenda junto cada vez mais. Isso, ao invés de enfraquecer as empresas, seus aplicativos e seus objetivos empresariais, apenas vem fortalecendo. 
+
+As técnicas e aplicações aplicadas e demonstradas pela Uber mostram que lidar com dados que são atualizados e requisitados a todo momento por usuários em todo o mundo, não é simples.
+Porém, é possível questionar se técnicas como a \textit{Schemaless}, que utiliza o MySQL para retornar objetos NoSQL em JSON não são excessivamente complicadas, possibilitando soluções mais simples de serem consideradas.
+Também é possível questionar uma certa arrogância que os artigos implicam quando diversos engenheiros afirmam que para uma implementação ser feita na Uber, todos os componentes devem ser entendidos pelos desenvolvedores e
+engenheiros de maneira exaustiva, e que em muitos casos era menos custoso criar uma implementação própria do que entender uma existente. Enquanto é afirmado que é mais fácil criar uma implementação totalmente nova, não é considerado que
+a equipe da Uber participe do desenvolvimento e implementação de correções de \textit{bugs} de \textit{frameworks} e programas existentes. 
+
+
 \section{Lições aprendidas}
 
 \section{Conclusão}
