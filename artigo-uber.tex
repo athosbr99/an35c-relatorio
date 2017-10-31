@@ -178,7 +178,7 @@ Junto com o Puppet, era utilizado alguns \textit{scripts} e algumas operações ma
 A solução para este problema foi a criação de um design de sistema que foi dado o nome de Schemadock, constituindo em utilizar diversos containers do MySQL
 no Docker \cite{uber2016-3}.
 
-A imagem do Docker utilizada pela Uber, quando criada, baixa o Percona Server e inicia o MySQL.
+A imagem do Docker utilizada pela Uber, quando criada, baixa o que for necessário e inicia o MySQL.
 Entre o processo de download e de inicio do MySQL, é verificado se no volume montado existe algum dado. Se não,
 caso seja uma instancia mestre, é iniciado um \textit{script} que coloca alguns usuários e tabelas padrões. Caso seja uma instancia
 escrava, inicia a sincronização de um \textit{backup} ou de outro \textit{node} no \textit{cluster}. Caso o processo de copia de dados falhe
@@ -199,10 +199,11 @@ As vantagens desta abordagem são \cite{uber2016-3}:
 
 \section{Análise crítica sobre o estudo de caso}
 
-Os artigos da Uber apresentados neste artigo, assim como outros no blog de Engenharia da Uber (https://eng.uber.com), fornecem uma visão única de como funciona
+Os artigos da Uber apresentados neste artigo, assim como outros no blog de Engenharia da Uber (\url{https://eng.uber.com}), fornecem uma visão única de como funciona
 internamente um aplicativo de sucesso mundial, incluindo como seus dados são gerenciados nos mínimos detalhes. Porém, é fácil de notar que
 a Uber exige de seus engenheiros um alto grau de conhecimento das ferramentas e \textit{frameworks} selecionados para uso, sendo que em alguns casos,
-a maioria deste artigo, a Uber preferiu criar soluções próprias em cima de soluções e conceitos já existentes.
+a maioria deste artigo, a Uber preferiu criar soluções próprias em cima de soluções e conceitos já existentes. Também é notável o uso extenso e profundo do Docker dentro
+da empresa, provando que é uma arquitetura relativamente madura e relevante na indústria. 
 
 Tal grau de maturidade não é atingido facilmente, e muitas empresas de tecnologia, não importando o quão sensível são os dados que gerenciam e muitas vezes
 não importando a quantidade de certificações e prêmios da indústria que possuem, não conseguem atingir tal nível de domínio de todas as partes da aplicação. 
@@ -216,10 +217,7 @@ para que a comunidade conheça e aprenda junto cada vez mais. Isso, ao invés de e
 
 As técnicas e aplicações aplicadas e demonstradas pela Uber mostram que lidar com dados que são atualizados e requisitados a todo momento por usuários em todo o mundo, não é simples.
 Porém, é possível questionar se técnicas como a \textit{Schemaless}, que utiliza o MySQL para retornar objetos NoSQL em JSON não são excessivamente complicadas, possibilitando soluções mais simples de serem consideradas.
-Também é possível questionar uma certa arrogância que os artigos implicam quando diversos engenheiros afirmam que para uma implementação ser feita na Uber, todos os componentes devem ser entendidos pelos desenvolvedores e
-engenheiros de maneira exaustiva, e que em muitos casos era menos custoso criar uma implementação própria do que entender uma existente. Enquanto é afirmado que é mais fácil criar uma implementação totalmente nova, não é considerado que
-a equipe da Uber participe do desenvolvimento e implementação de correções de \textit{bugs} de \textit{frameworks} e programas existentes. 
-
+Também é questionável a afirmação de que é mais fácil criar uma solução nova do que utilizar uma solução existente por ser mais dificil de entender uma solução já criada e testada em toda sua planitude.
 
 \section{Lições aprendidas}
 
