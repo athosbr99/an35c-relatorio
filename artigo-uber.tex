@@ -200,8 +200,8 @@ A solução para este problema foi a criação de um design de sistema que foi dado 
 no Docker \cite{uber2016-3}.
 
 A imagem do Docker utilizada pela Uber, quando criada, baixa o que for necessário e inicia o MySQL.
-Entre o processo de download e de inicio do MySQL, é verificado se no volume montado existe algum dado. Se não,
-caso seja uma instancia mestre, é iniciado um \textit{script} que coloca alguns usuários e tabelas padrões. Caso seja uma instancia
+Entre o processo de download e de inicio do MySQL, é verificado se no volume montado para o \textit{container} existe algum dado (\url{https://docs.docker.com/engine/admin/volumes/volumes/}). 
+Se não, caso seja uma instancia mestre, é iniciado um \textit{script} que coloca alguns usuários e tabelas padrões. Caso seja uma instancia
 escrava, inicia a sincronização de um \textit{backup} ou de outro \textit{node} no \textit{cluster}. Caso o processo de copia de dados falhe
 em algum momento, o \textit{container} desliga. O papel do \textit{container} é definido através de variáveis de ambiente.
 Os parâmetros de configuração do MySQL são inseridos dentro das imagens do Docker. Desta maneira, não é necessário (e não é feito)
@@ -244,12 +244,10 @@ Também é questionável a afirmação de que é mais fácil criar uma solução nova do 
 
 Com o crescimento das empresas e integração de novos dados para a administração, a gestão do banco de dados tem sido um dos 
 pontos mais importantes quando se trata de expansão. O ponto chave com relação aos dados armazenados é a integridade dos mesmos 
-sendo inaceitável a perda de informações dentro de uma empresa, seja ela de grande ou pequeno porte. 
-As requisições precisam ser executas com precisão e as respostas exibidas o mais rápido possível. 
-
-Grandes soluções para tratamento dos dados existem e as grandes empresas tem a liberdade para utilizar \textit{frameworks} 
-existentes ou até mesmo criar algo que as atenda da melhor maneira, gerando e disponibilizando cada vez mais soluções na área de 
-tecnologia e desenvolvimento.
+sendo inaceitável a perda de informações dentro de uma empresa, seja ela de grande ou pequeno porte. As requisições precisam ser 
+executas com precisão e as respostas exibidas o mais rápido possível. Grandes soluções para tratamento dos dados existem e as 
+grandes empresas tem a liberdade para utilizar \textit{frameworks} existentes ou até mesmo criar algo que as atenda da melhor 
+maneira, gerando e disponibilizando cada vez mais soluções na área de tecnologia e desenvolvimento.
 
 \section{Conclusão}
 
