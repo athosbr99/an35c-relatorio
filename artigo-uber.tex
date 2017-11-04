@@ -28,7 +28,7 @@
 
 \section{Introdução}
 
-A internet se tornou, atualmente, um fator primordial de uma sociedade e um fator critico no crescimento de uma nação. É possível afirmar que a sociedade atual vive na economia da informação e que
+A internet se tornou um fator primordial de uma sociedade e um fator critico no crescimento de uma nação. É possível afirmar que a sociedade atual vive na economia da informação e que
 a produtividade e competividade de uma empresa depende da capacidade de criar, processar e aplicar informação baseada em conhecimento, dependendo do uso intensivo da tecnologia.
 É estimado que pelo menos dois terços das empresas existentes no mundo tem algum tipo de presença na internet. 
 Também é estimado que o \textit{ecommerce} movimenta oito trilhões de dólares anualmente e que a internet contribui mais que a agricultura, energia e outros setores tradicionais no PIB de uma nação \cite{Boban2017} \cite{Rausas2011}.
@@ -49,13 +49,18 @@ de microserviços, onde os módulos são dependentes e não causam grande dano quant
 \section{Problema} 
 
 Uma empresa grande possui diversas informações armazenadas, que são constantemente requisitadas por diversos serviços, sejam aparelhos de clientes finais
-ou sistemas de \textit{middleware}. O sistema de banco de dados selecionado não pode demorar para entregar as informações requisitadas, muito menos perde-las.
+ou sistemas de \textit{middleware}. A arquitetura do sistema utilizando pela empresa deve ser condizente com o tamanho da empresa, carga de uso e numero de usuários, assim
+como a importância das informações armazenadas. 
+
+O sistema de banco de dados selecionado não pode demorar para entregar as informações requisitadas, muito menos perde-las.
 Centralizar todos os dados da empresa em um único servidor de banco de dados pode, em alguns casos, não ser a melhor saída, devido questões de performance e segurança, 
-sendo necessário descobrir novas formas de implementar uma estrutura de banco de dados confiável.
+sendo necessário descobrir novas formas de implementar uma estrutura de banco de dados confiável. Caso o sistema também tenha uma arquitetura monolítica e alguma parte deste
+sistema tenha defeito, o resultado pode ser catastrófico para a sobrevivência da empresa.
 
 \section{Objetivo}
 
-Neste trabalho será relatado como a Uber armazena suas informações, através do conhecido SGBD (Sistema de Gerenciamento de Banco de Dados) MySQL, da Oracle em uma arquitetura de 
+Neste trabalho será relatado como a Uber, empresa pioneira em transporte publico compartilhado através de aplicativos, armazena suas informações 
+através do conhecido SGBD (Sistema de Gerenciamento de Banco de Dados) MySQL da Oracle em uma arquitetura de 
 microserviços, os motivos desta abordagem, suas vantagens e como é utilizada. 
 
 \section{Estudo de Caso} 
