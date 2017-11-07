@@ -5,7 +5,7 @@
     \usepackage[latin1]{inputenc}
     \usepackage[T1]{fontenc}
     \usepackage{graphicx}
-    \usepackage{pgfgantt}
+
     \title{Estudo de Caso da infraestrutura de banco de dados da Uber}
     \author[Athos, Lais]{Athos Castro Moreno \and Lais Brazil Peixoto Macedo}
     
@@ -32,6 +32,10 @@
             \frametitle{Docker e microserviços}
             \begin{itemize}
                 \item Conceito;
+                    \begin{itemize}
+                        \item Containers;
+                        \item Imagens.
+                    \end{itemize}
                 \item Como funciona;
                 \item Como utilizar;
                 \item Utilidade;
@@ -44,7 +48,28 @@
                 \item Migração do PostgreSQL para o MySQL;
                 \item Monolítica para microserviços;
                 \item Utilização do Docker com MySQL;
-                \item \textit{Schemaless}
+                \item \textit{Schemaless}.
+                    \begin{itemize}
+                        \item Necessidade do projeto;
+                        \item Resultados esperados;
+                    \end{itemize}
+            \end{itemize}
+        \end{frame}
+        \begin{frame}
+            \frametitle{Resultados e analise}
+            \begin{itemize}
+                \item 1500 servidores Docker e 2500 servidores MySQL;
+                \item Armazenamento de viagens dobrado sem \textit{downtime};
+                \item Melhorias em performance;
+                \item Utilização em outros serviços dentro da Uber.
+            \end{itemize}
+        \end{frame}
+        \begin{frame}
+            \frametitle{Resultados e analise}
+            \begin{itemize}
+                \item Projeto complexo de implementação;
+                \item Abertura de informações corporativas;
+                \item Bom planejamento;
             \end{itemize}
         \end{frame}
         \begin{frame}
