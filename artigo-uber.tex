@@ -198,11 +198,10 @@ E durante o processo era necessário fazer a validação dos dados migrados para ga
 
 \subsection{\textit{Dockerização} do MySQL}
 
-O sistema de armazenamento \textit{Schemaless} funciona com diversos \textit{clusters} com o MySQL. É estimado que dentro da Uber existam mais de 
-1,000 \textit{clusters} com mais de 4000 servidores de banco de dados. Para gerenciar isso, a equipe do Uber utilizou, no inicio, o \textit{software} Puppet, 
+O sistema de armazenamento \textit{Schemaless} funciona com diversos \textit{clusters} com o MySQL. Para gerenciar isso, a equipe do Uber utilizou, no inicio, o \textit{software} Puppet, 
 que é uma ferramenta de automação para configurações.
 Junto com o Puppet, era utilizado alguns \textit{scripts} e algumas operações manuais, que não eram escaláveis com o crescimento da empresa.
-A solução para este problema foi a criação de um design de sistema que foi dado o nome de Schemadock, constituindo em utilizar diversos containers do MySQL
+A solução para este problema foi a criação de um design de sistema que foi dado o nome de \textit{Schemadock}, constituindo em utilizar diversos containers do MySQL
 no Docker \cite{uber2016-3}.
 
 A imagem do Docker utilizada pela Uber, quando criada, baixa o que for necessário e inicia o MySQL.
@@ -223,6 +222,15 @@ As vantagens desta abordagem são \cite{uber2016-3}:
 \end{itemize}
 
 \subsection{Resultados}
+
+Os artigos da Uber são, talvez propositalmente, escassos em relação aos resultados das implementações. Porém, é possível listar algumas coisas.
+
+Como resultado da implantação do Projeto \textit{Mezzanine} e do Docker, a Uber possui ferramentas de manutenção diária que possuem interfaces
+para manipulação, sem necessidade de interagir diretamente com o hospedeiro dos bancos de dados. É estimado que existam mais de 1500 servidores 
+do Docker com mais de 2300 bancos de dados MySQL \cite{uber2016-3}. 
+
+O Projeto \textit{Mezzanine} permitiu que o armazenamento de viagens fosse dobrado mais uma vez sem o serviço ficar indisponível, além de várias
+melhorias na performance e operacionais. O \textit{Schemaless} também foi implementado em outros serviços da Uber \cite{uber2015}.
 
 \section{Análise crítica sobre o estudo de caso}
 
@@ -248,6 +256,18 @@ Também é questionável a afirmação de que é mais fácil criar uma solução nova do 
 
 \section{Lições aprendidas}
 
+Em \cite{uber2015}, é listada algumas dicas em relação a migração, tais como:
+
+\begin{itemize}
+  \item Sempre utilizar UUIDs;
+  \item Manter a camada de dados simples;
+  \item Irá existir uma curva de aprendizado;
+  \item Terminar a migração o mais rápido possível;
+  \item Tentativa e erro será inevitável;
+\end{itemize}
+
+\section{Conclusão}
+
 Com o crescimento das empresas e integração de novos dados para a administração, a gestão do banco de dados tem sido um dos 
 pontos mais importantes quando se trata de expansão. O ponto chave com relação aos dados armazenados é a integridade dos mesmos 
 sendo inaceitável a perda de informações dentro de uma empresa, seja ela de grande ou pequeno porte. As requisições precisam ser 
@@ -258,7 +278,6 @@ recém-formados e novatos no geral tentem conhecer como funciona um banco de dado
 da Uber, para ter uma melhor inserção de mercado. Também é importante que veteranos tenham conhecimento de novas técnicas e tecnologias para que
 suas empresas continuem a ter práticas de desenvolvimento cada vez melhores, entregando cada vez mais valor aos seus consumidores.
 
-\section{Conclusão}
 
 \bibliography{bibliografia}
 
