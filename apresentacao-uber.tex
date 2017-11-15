@@ -65,6 +65,16 @@
             \end{itemize}
         \end{frame}
         \begin{frame}
+            \frametitle{\textit{Schemaless}}
+            O que era esperado da nova plataforma:
+            \begin{itemize}
+                \item \textit{Sharding} (capacidade de armazenar dados em vários locais diferentes);
+                \item Escrita \textit{append-only}, ou seja, os dados são apenas adicionados e nunca atualizados;
+                \item \textit{Indexes} secundários em múltiplos locais (através do \textit{sharding});
+                \item \textit{Buffered writes}: Se o local que um dado precisa ser gravado está lento, este dado é gravado em outro servidor disponível até a disponibilidade do primeiro acontecer.              
+            \end{itemize}
+        \end{frame}
+        \begin{frame}
             \frametitle{Resultados e analise}
             \begin{itemize}
                 \item Ferramenta GUI para gestão;
